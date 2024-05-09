@@ -1,4 +1,4 @@
-﻿namespace MinimalApi
+﻿namespace MinimalApi.Services
 {
     public interface IBookService
     {

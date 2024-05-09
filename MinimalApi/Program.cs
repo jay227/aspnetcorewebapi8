@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
-using MinimalApi;
 using MinimalApi.Constants;
 using FluentValidation;
+using MinimalApi.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IBookService, BookService>();
+builder.Services.AddSingleton<IWeOnlyDo, WeOnlyDoServices>();
 
 
 // Adding rate limiter and policy
@@ -71,6 +72,12 @@ app.MapDelete("/books/{id}", (IBookService bookService, int id) =>
     bookService.DeleteBook(id);
     return TypedResults.NoContent();
 }).WithName("DeleteBook");
+
+app.MapPost("/SendFile", (IWeOnlyDo wdoService) =>
+{
+    wdoService.SendFile();
+    return TypedResults.Ok();
+}).WithName("SendFile");
 
 
 
