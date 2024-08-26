@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minimalApi-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: minimalApi
+  template:
+    metadata:
+      labels:
+        app: minimalApi
+    spec:
+      containers:
+      - name: minimalApi
+        image: minimalApi:latest  # Replace with your image path
+        ports:
+        - containerPort: 8080
