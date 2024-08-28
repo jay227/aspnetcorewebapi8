@@ -11,7 +11,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IBookService, BookService>();
-builder.Services.AddSingleton<IWeOnlyDo, WeOnlyDoServices>();
 
 
 // Adding rate limiter and policy
@@ -74,11 +73,7 @@ app.MapDelete("/books/{id}", (IBookService bookService, int id) =>
     return TypedResults.NoContent();
 }).WithName("DeleteBook");
 
-app.MapPost("/SendFile", (IWeOnlyDo wdoService) =>
-{
-    wdoService.SendFile();
-    return TypedResults.Ok();
-}).WithName("SendFile");
+
 
 
 
